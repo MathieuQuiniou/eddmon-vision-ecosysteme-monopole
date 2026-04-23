@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>L'écosystème Eddmon</title>
+<meta name="description" content="Vision commerciale du groupe Eddmon. Dix verticales, deux piliers invisibles, trois outils transverses.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-page: #262624;
+    --bg-card: #2e2e2b;
+    --bg-sub: #34332f;
+    --text-primary: #f5f4ed;
+    --text-secondary: #c2c0b6;
+    --text-tertiary: #8c8a82;
+    --border-tertiary: rgba(255, 255, 255, 0.07);
+    --border-secondary: rgba(255, 255, 255, 0.16);
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg-page);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1.5;
+  }
+
+  .page {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 64px 48px 80px;
+  }
+
+  .page-head { margin-bottom: 40px; }
+  .page-kicker {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text-tertiary);
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+  .page-title {
+    font-size: 36px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    margin: 0 0 12px;
+    line-height: 1.15;
+  }
+  .page-sub {
+    font-size: 15px;
+    color: var(--text-secondary);
+    max-width: 640px;
+    margin: 0;
+  }
+
+  .eco { margin-top: 8px; }
+  .eco-title-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+  .eco-title { font-size: 20px; font-weight: 500; color: var(--text-primary); }
+  .eco-instruction { font-size: 13px; color: var(--text-secondary); line-height: 1.5; }
+  .eco-reset {
+    font-size: 12px;
+    color: var(--text-tertiary);
+    cursor: pointer;
+    padding: 6px 14px;
+    border-radius: 999px;
+    background: transparent;
+    border: 1px solid var(--border-tertiary);
+    font-family: inherit;
+    visibility: hidden;
+    transition: all 0.15s;
+    flex-shrink: 0;
+  }
+  .eco-reset.show { visibility: visible; }
+  .eco-reset:hover { color: var(--text-primary); background: var(--bg-card); border-color: var(--border-secondary); }
+
+  .eco-block { margin-bottom: 20px; }
+  .eco-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-tertiary);
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+  .eco-pills { display: flex; flex-wrap: wrap; gap: 8px; }
+  .eco-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 14px;
+    border-radius: 999px;
+    font-size: 13px;
+    background: var(--bg-card);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-tertiary);
+    cursor: pointer;
+    transition: all 0.15s;
+    user-select: none;
+  }
+  .eco-pill:hover { border-color: var(--border-secondary); color: var(--text-primary); }
+  .eco-pill.dim { opacity: 0.2; }
+  .eco-pill.hot {
+    background: var(--hot-bg);
+    color: var(--hot-text);
+    border-color: var(--hot-border);
+    font-weight: 500;
+  }
+
+  .eco-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    margin-top: 4px;
+  }
+  .eco-card {
+    border-radius: var(--radius-lg);
+    padding: 16px 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: var(--c-bg);
+    color: var(--c-text);
+    border: 1.5px solid transparent;
+    min-height: 124px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+  }
+  .eco-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--c-border);
+  }
+  .eco-card.on {
+    border-color: var(--c-border);
+    transform: translateY(-3px);
+  }
+  .eco-card.dim { opacity: 0.18; transform: none; }
+  .eco-card-name { font-size: 14px; font-weight: 500; line-height: 1.25; }
+  .eco-card-tag { font-size: 12px; line-height: 1.35; opacity: 0.82; margin-top: 3px; }
+  .eco-card-price { font-size: 12px; font-weight: 500; margin-top: 10px; }
+  .eco-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--c-border); margin-bottom: 10px; }
+
+.eco-info {
+    margin-top: 0;
+    padding: 0 16px;
+    border-radius: var(--radius-lg);
+    background: var(--bg-card);
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.25s, padding 0.25s, margin-top 0.25s;
+    border-left: 3px solid transparent;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-secondary) transparent;
+  }
+  .eco-info.show {
+    max-height: 160px;
+    padding: 16px 18px;
+    margin-top: 18px;
+    border-left-color: var(--info-color, var(--border-secondary));
+    overflow-y: auto;
+  }
+  .eco-info::-webkit-scrollbar {
+    width: 6px;
+  }
+  .eco-info::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .eco-info::-webkit-scrollbar-thumb {
+    background: var(--border-secondary);
+    border-radius: 3px;
+  }
+  .eco-info::-webkit-scrollbar-thumb:hover {
+    background: var(--text-tertiary);
+  }
+  .eco-info-name { font-weight: 500; color: var(--text-primary); }
+  .eco-info-sep { margin: 0 10px; color: var(--text-tertiary); }
+  .eco-info-body { display: block; margin-top: 6px; }
+
+  /* Verticales palettes (dark Claude) */
+  [data-c="purple"] { --c-bg: #26215C; --c-text: #CECBF6; --c-border: #7F77DD; }
+  [data-c="teal"]   { --c-bg: #04342C; --c-text: #9FE1CB; --c-border: #1D9E75; }
+  [data-c="coral"]  { --c-bg: #4A1B0C; --c-text: #F5C4B3; --c-border: #D85A30; }
+  [data-c="pink"]   { --c-bg: #4B1528; --c-text: #F4C0D1; --c-border: #D4537E; }
+  [data-c="gray"]   { --c-bg: #3a3a37; --c-text: #D3D1C7; --c-border: #888780; }
+  [data-c="blue"]   { --c-bg: #042C53; --c-text: #B5D4F4; --c-border: #378ADD; }
+  [data-c="green"]  { --c-bg: #173404; --c-text: #C0DD97; --c-border: #639922; }
+  [data-c="amber"]  { --c-bg: #412402; --c-text: #FAC775; --c-border: #BA7517; }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .page { padding: 48px 32px 64px; }
+    .eco-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 640px) {
+    .page { padding: 32px 20px 48px; }
+    .page-title { font-size: 26px; }
+    .page-sub { font-size: 14px; }
+    .eco-title { font-size: 18px; }
+    .eco-title-row { flex-direction: column; align-items: flex-start; }
+    .eco-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .eco-card { padding: 14px 12px; min-height: 116px; }
+    .eco-card-name { font-size: 13px; }
+    .eco-pill { font-size: 12px; padding: 7px 12px; }
+  }
+  @media (max-width: 380px) {
+    .eco-grid { grid-template-columns: 1fr; }
+  }
+
+  /* Footer */
+  .page-foot {
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border-tertiary);
+    font-size: 12px;
+    color: var(--text-tertiary);
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+  <div class="page-head">
+    <div class="page-kicker">Groupe Trousseau, vision Eddmon</div>
+    <h1 class="page-title">L'écosystème Eddmon</h1>
+    <p class="page-sub">Dix verticales commerciales, deux piliers invisibles, trois outils transverses. Une famille CSP+ qui reste dans un seul hub pour toute la vie éducative et logistique de ses enfants.</p>
+  </div>
+
+  <div class="eco">
+    <div class="eco-title-row">
+      <div class="eco-instruction">Clique sur une offre, un outil, une ressource ou un segment pour voir les connexions.</div>
+      <button class="eco-reset" id="eco-reset" type="button">Tout afficher</button>
+    </div>
+
+    <div class="eco-block">
+      <div class="eco-label">Ressources</div>
+      <div class="eco-pills">
+        <div class="eco-pill" data-kind="res" data-id="tuteurs">Réseau tuteurs, 1500+ majors</div>
+        <div class="eco-pill" data-kind="res" data-id="contenus">Base de contenus pédagogiques</div>
+      </div>
+    </div>
+
+    <div class="eco-block">
+      <div class="eco-label">Outils transverses</div>
+      <div class="eco-pills">
+        <div class="eco-pill" data-kind="tool" data-id="swype">Swype, visio + whiteboard</div>
+        <div class="eco-pill" data-kind="tool" data-id="studio">Eddmon Studio, cours chez le prof</div>
+        <div class="eco-pill" data-kind="tool" data-id="hub">Hub familial</div>
+      </div>
+    </div>
+
+    <div class="eco-block">
+      <div class="eco-label">Verticales commerciales</div>
+      <div class="eco-grid" id="eco-grid">
+        <div class="eco-card" data-c="gray" data-id="eddmon">
+          <div><div class="eco-dot"></div><div class="eco-card-name">Eddmon</div><div class="eco-card-tag">Cours particuliers</div></div>
+          <div class="eco-card-price">Standard + 50%</div>
+        </div>
+        <div class="eco-card" data-c="purple" data-id="coach">
+          <div><div class="eco-dot"></div><div class="eco-card-name">Eddmon Coach</div><div class="eco-card-tag">Coach IA</div></div>
+          <div class="eco-card-price">29€/mois ou gratuit</div>
+        </div>
+        <div class="eco-card" data-c="blue" data-id="north">
+          <div><div class="eco-dot"></div><div class="eco-card-name">Eddmon North</div><div class="eco-card-tag">Orientation</div></div>
+          <div class="eco-card-price">100€/h + forfait</div>
+        </div>
+        <div class="eco-card" data-c="coral" data-id="prep">
+          <div><div class="eco-dot"></div><div class="eco-card-name">Eddmon Prep</div><div class="eco-card-tag">Prépa sup</div></div>
+          <div class="eco-card-price">3000€/an</div>
+        </div>
+        <div class="eco-card" data-c="teal" data-id="lingo">
+          <div><div class="eco-dot"></div><div class="eco-card-name">Eddmon Lingo</div><div class="eco-card-tag">Langues natives</div></div>
+          <div class="eco-card-price">150€/mois</div>
+        </div>
+        <div class="eco-card" data-c="amber" data-id="studio-v">
+          <div><div class="eco-dot"></div><div class="eco-card-name">Eddmon Studio</div><div class="eco-card-tag">Cours en groupe</div></div>
+          <div class="eco-card-price">16€/h</div>
+        </div>
+        <div class="eco-card" data-c="pink" data-id="tempo">
+          <div><div class="eco-dot"></div><div class="eco-card-name">Eddmon Tempo</div><div class="eco-card-tag">Musique</div></div>
+          <div class="eco-card-price">25€/h</div>
+        </div>
+        <div class="eco-card" data-c="green" data-id="nest">
+          <div><div class="eco-dot"></div><div class="eco-card-name">Eddmon Nest</div><div class="eco-card-tag">Babysitting éducatif</div></div>
+          <div class="eco-card-price">14,90€/h</div>
+        </div>
+        <div class="eco-card" data-c="purple" data-id="pair">
+          <div><div class="eco-dot"></div><div class="eco-card-name">Eddmon Pair</div><div class="eco-card-tag">Au pair</div></div>
+          <div class="eco-card-price">Premium</div>
+        </div>
+        <div class="eco-card" data-c="gray" data-id="casa">
+          <div><div class="eco-dot"></div><div class="eco-card-name">Eddmon Casa</div><div class="eco-card-tag">Ménage premium</div></div>
+          <div class="eco-card-price">~10€/h</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="eco-info" id="eco-info"></div>
+
+    <div class="eco-block" style="margin-top: 20px;">
+      <div class="eco-label">Segments de marché</div>
+      <div class="eco-pills">
+        <div class="eco-pill" data-kind="pers" data-id="csp">Parents CSP+ premium</div>
+        <div class="eco-pill" data-kind="pers" data-id="rural">Zones rurales</div>
+        <div class="eco-pill" data-kind="pers" data-id="groupe">Ados, budgets légers</div>
+        <div class="eco-pill" data-kind="pers" data-id="international">Familles internationales</div>
+        <div class="eco-pill" data-kind="pers" data-id="ecoles">Écoles hors contrat</div>
+        <div class="eco-pill" data-kind="pers" data-id="passion">Familles passion</div>
+        <div class="eco-pill" data-kind="pers" data-id="opportunites">Créateurs d'opportunités</div>
+        <div class="eco-pill" data-kind="pers" data-id="debordes">Parents actifs débordés</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-foot">Document de travail interne · Groupe Trousseau</div>
+</div>
+
+<script>
+(function() {
+var verts = {
+  'eddmon': { 
+    name: 'Eddmon', 
+    tag: 'Cours particuliers', 
+    color: 'gray', 
+    tools: ['swype'], 
+    res: ['tuteurs'], 
+    pers: ['csp','rural'], 
+    role: "Cours individuels à domicile ou en ligne via Swype, du primaire au lycée, avec des tuteurs issus des grandes écoles. Chaque famille est matchée avec un tuteur selon le niveau de l'élève, la matière et les préférences de profil. À domicile, avance immédiate URSSAF (cadre SAP) donc 50% de déduction fiscale immédiate pour le parent. À distance, le cours se fait via Swype, notre plateforme propriétaire qui intègre visio, tableau blanc collaboratif et tablettes graphiques fournies au tuteur comme à l'élève.<br><br>C'est la verticale historique du groupe, la principale source d'acquisition familiale, et le ticket d'entrée naturel vers tout le reste de l'écosystème. Tout élève en cours particulier débloque automatiquement Eddmon Coach en version gratuite, ce qui prolonge l'expérience entre les cours et fidélise la famille sur la durée." 
+  },
+  'coach': { 
+    name: 'Eddmon Coach', 
+    tag: 'Coach IA', 
+    color: 'purple', 
+    tools: ['hub'], 
+    res: ['contenus'], 
+    pers: ['csp','rural'], 
+    role: "Un coach personnel IA disponible 24h/24, exclusivement en 1 to 1, du primaire au lycée. La particularité : c'est le tuteur humain de l'élève qui pilote l'IA. Il peut la borner (\"révise Pythagore ce soir, j'ai vu qu'elle coince\"), orienter les révisions, et s'assurer que l'enfant travaille les bonnes notions entre les sessions. L'IA devient un prolongement du tuteur, pas un chatbot générique.<br><br>Quand l'élève bloque, le Coach le redirige vers une vidéo pédagogique tournée par un tuteur Eddmon. Si la vidéo n'existe pas, l'équipe est notifiée, la produit, et la republie sur YouTube Kids, Instagram et TikTok pour alimenter notre communication virale à coût marginal zéro. Les fiches de cours sont générées à la volée par l'IA, donc aucun coût de production de contenu. Version gratuite débloquée par défaut dès que la famille consomme un autre service payant du groupe. Sinon, abonnement premium à 29€/mois pour débloquer toutes les fonctionnalités. Coach ne fonctionne ni pour la prépa sup, ni pour les formats groupés." 
+  },
+  'north': { 
+    name: 'Eddmon North', 
+    tag: 'Orientation', 
+    color: 'blue', 
+    tools: ['swype'], 
+    res: ['tuteurs'], 
+    pers: ['csp','opportunites'], 
+    role: "La plateforme d'orientation haut de gamme, en deux offres distinctes selon le profil parent.<br><br>Offre 1, \"Appel avec le tuteur de tes rêves\" à 100€/heure. Le parent ou l'ado décrit son profil rêvé à une IA, matching vectoriel dans notre base de 1500+ tuteurs. Le parent sélectionne un créneau, le paiement est bloqué sur Stripe, un lien visio est généré automatiquement. Si le tuteur annule, remboursement instantané ; sinon paiement validé 2h avant l'appel. Full automatisation, zéro friction.<br><br>Offre 2, coaching Parcoursup annuel. 15 minutes découverte offertes, puis accompagnement par un conseiller Eddmon sur toute l'année, selon un playbook standardisé qui garantit la qualité du suivi.<br><br>La verticale monétise directement notre réseau tuteurs à coût marginal quasi-nul et positionne Eddmon sur un segment premium rare." 
+  },
+  'prep': { 
+    name: 'Eddmon Prep', 
+    tag: 'Prépa sup', 
+    color: 'coral', 
+    tools: ['swype','studio'], 
+    res: ['tuteurs','contenus'], 
+    pers: ['csp'], 
+    role: "La plateforme qui garantit aux élèves ambitieux l'entrée dans les formations les plus prestigieuses : Sciences Po, médecine, CPGE, HEC, écoles d'art ou d'ingénieurs. Le parent choisit un format : en ligne via Swype, à domicile, ou en groupe via Eddmon Studio.<br><br>Chaque parcours inclut un tuteur major référent qui pilote la formation de bout en bout, 15 sessions annuelles de coaching personnalisé débloquables selon un planning mensuel précis, et l'option d'acheter des sessions supplémentaires. L'accès illimité à notre base de contenus pédagogiques spécifique au parcours fait la différence : fiches rédigées par les majors, annales corrigées, concours blancs chronométrés. Plus on monte en volume, plus la base devient un asset difficilement réplicable.<br><br>Pricing 3000€/an par parcours. C'est le plus gros panier moyen de l'écosystème avec la plus forte marge." 
+  },
+  'lingo': { 
+    name: 'Eddmon Lingo', 
+    tag: 'Langues natives', 
+    color: 'teal', 
+    tools: ['swype'], 
+    res: ['tuteurs'], 
+    pers: ['international'], 
+    role: "Apprendre une langue dès le plus jeune âge avec des tuteurs natifs du pays ciblé. Cours en ligne uniquement via Swype pour garantir la scalabilité et la disponibilité des natifs.<br><br>Format standard : 3 sessions de 30 minutes par semaine avec un tuteur natif, avec des fiches support pour pratiquer entre les sessions (vocabulaire, grammaire, culture). L'intensité régulière et le format court permettent une progression rapide sans surcharger l'emploi du temps de l'enfant.<br><br>Pricing 150€/mois, formules payées au mois, au trimestre ou à l'année. Lingo joue un rôle stratégique de sourcing pour Eddmon Pair : les tuteurs natifs qui souhaitent venir vivre en France deviennent automatiquement les candidats au pair pour les familles clientes du groupe." 
+  },
+  'studio-v': { 
+    name: 'Eddmon Studio', 
+    tag: 'Cours en groupe', 
+    color: 'amber', 
+    tools: [], 
+    res: ['tuteurs'], 
+    pers: ['groupe'], 
+    role: "Plateforme de réservation de cours groupés de 2 à 4 élèves maximum chez un tuteur vérifié. Le tuteur déclare qu'il reçoit chez lui, son appartement et son profil sont vérifiés automatiquement. Les familles cherchent un tuteur star dans leur zone, comparent les profils et réservent un créneau. Les élèves se retrouvent chez le tuteur pour un cours en petit groupe, souvent entre amis, ce qui réduit la barrière psychologique du cours solo.<br><br>Pricing 16€/heure par élève. Pas de déduction fiscale, mais un tarif beaucoup plus accessible qui ouvre le marché aux budgets plus légers. Studio est à la fois une verticale commerciale autonome ET une infrastructure stratégique pour le groupe : l'option \"en groupe\" de Prep et Tempo passe par cette interface." 
+  },
+  'tempo': { 
+    name: 'Eddmon Tempo', 
+    tag: 'Musique', 
+    color: 'pink', 
+    tools: ['swype','studio'], 
+    res: ['tuteurs'], 
+    pers: ['passion'], 
+    role: "Apprendre tous les instruments en quelques cours, sans pression, par passion ou par ambition. Trois formats au choix : à domicile pour la déduction fiscale 50%, en ligne via Swype, ou en groupe via Eddmon Studio.<br><br>La particularité : le réseau est élargi au-delà des étudiants majors pour inclure des profs expérimentés type Superprof (concertistes, musiciens professionnels) pour garantir une qualité pédagogique sur tous les instruments. Pricing 25€/heure pour toutes les options. La verticale élargit notre marché au-delà du scolaire pur et renforce l'image d'éveil culturel et artistique du groupe." 
+  },
+  'nest': { 
+    name: 'Eddmon Nest', 
+    tag: 'Babysitting éducatif', 
+    color: 'green', 
+    tools: [], 
+    res: ['tuteurs'], 
+    pers: ['csp','debordes'], 
+    role: "Le babysitting qui éduque, par des étudiants des meilleures écoles. Ce n'est pas de la simple surveillance, c'est un temps éducatif actif : lecture, aide aux devoirs, éveil. Même réseau que celui des cours particuliers Eddmon, avec des étudiants qui viennent à domicile.<br><br>Pricing 14,90€/heure avec avance immédiate URSSAF (cadre SAP), ramenant le prix net effectif autour de 7,45€/heure. Nest capture la famille dès le plus jeune âge de l'enfant, crée une entrée précoce dans l'écosystème, et prépare la transition naturelle vers les cours particuliers classiques." 
+  },
+  'pair': { 
+    name: 'Eddmon Pair', 
+    tag: 'Au pair', 
+    color: 'purple', 
+    tools: [], 
+    res: ['tuteurs'], 
+    pers: ['international','ecoles'], 
+    role: "Un étudiant étranger qui vit chez la famille sur une durée longue et accompagne les enfants au quotidien : garde, devoirs, immersion linguistique. Le sourcing se fait via les tuteurs natifs de Eddmon Lingo qui souhaitent venir en France, offrant un vivier qualifié et déjà évalué par nos soins.<br><br>Le matching vise des familles très aisées (écoles type EIB Monceau, Jeannine Manuel), ouvertes à l'international. Frais d'inscription offerts si la famille consomme déjà un autre service du Hub pour inciter au cross-sell. C'est la verticale qui capture la famille sur la durée la plus longue avec le panier moyen le plus élevé." 
+  },
+  'casa': { 
+    name: 'Eddmon Casa', 
+    tag: 'Ménage premium', 
+    color: 'gray', 
+    tools: [], 
+    res: [], 
+    pers: ['debordes'], 
+    role: "Le ménage premium inspiré de Shiva pour l'excellence et WeCasa pour l'expérience utilisateur. L'objectif est de devenir le point de contact unique pour les familles CSP+ déjà acquises. Les agents sont recrutés, formés aux standards de l'hôtellerie (propreté, discrétion) et gérés via la plateforme.<br><br>Pricing autour de 10€/heure (net après avantage fiscal SAP). Casa maximise le panier moyen par famille et renforce l'image d'écosystème global où Eddmon gère autant l'éducation que l'intendance de la maison. C'est un pur produit d'upsell sur notre base existante." 
+  }
+};
+
+  var colors = {
+    purple: ['#26215C','#CECBF6','#7F77DD'],
+    teal:   ['#04342C','#9FE1CB','#1D9E75'],
+    coral:  ['#4A1B0C','#F5C4B3','#D85A30'],
+    pink:   ['#4B1528','#F4C0D1','#D4537E'],
+    gray:   ['#3a3a37','#D3D1C7','#888780'],
+    blue:   ['#042C53','#B5D4F4','#378ADD'],
+    green:  ['#173404','#C0DD97','#639922'],
+    amber:  ['#412402','#FAC775','#BA7517']
+  };
+
+  var info = document.getElementById('eco-info');
+  var resetBtn = document.getElementById('eco-reset');
+  var activeId = null;
+
+  function paint(vertId) {
+    var v = verts[vertId];
+    if (!v) return;
+    var palette = colors[v.color];
+
+    var cards = document.querySelectorAll('.eco-card');
+    for (var i = 0; i < cards.length; i++) {
+      cards[i].classList.remove('on','dim');
+      if (cards[i].dataset.id === vertId) cards[i].classList.add('on');
+      else cards[i].classList.add('dim');
+    }
+
+    var pills = document.querySelectorAll('.eco-pill');
+    var related = {};
+    (v.tools||[]).forEach(function(id){ related[id]=1; });
+    (v.res||[]).forEach(function(id){ related[id]=1; });
+    (v.pers||[]).forEach(function(id){ related[id]=1; });
+
+    for (var j = 0; j < pills.length; j++) {
+      pills[j].classList.remove('hot','dim');
+      pills[j].style.removeProperty('--hot-bg');
+      pills[j].style.removeProperty('--hot-text');
+      pills[j].style.removeProperty('--hot-border');
+      if (related[pills[j].dataset.id]) {
+        pills[j].classList.add('hot');
+        pills[j].style.setProperty('--hot-bg', palette[0]);
+        pills[j].style.setProperty('--hot-text', palette[1]);
+        pills[j].style.setProperty('--hot-border', palette[2]);
+      } else {
+        pills[j].classList.add('dim');
+      }
+    }
+
+    info.style.setProperty('--info-color', palette[2]);
+    info.innerHTML = '<span class="eco-info-name">' + v.name + '</span><span class="eco-info-sep">·</span>' + v.tag + '<span class="eco-info-body">' + v.role + '</span>';
+    info.classList.add('show');
+    resetBtn.classList.add('show');
+    activeId = vertId;
+  }
+
+  function paintFromPill(kind, id) {
+    var matchKey = kind === 'tool' ? 'tools' : (kind === 'res' ? 'res' : 'pers');
+    var matchingVerts = [];
+    for (var vid in verts) {
+      if (verts[vid][matchKey].indexOf(id) >= 0) matchingVerts.push(vid);
+    }
+
+    var pills = document.querySelectorAll('.eco-pill');
+    for (var k = 0; k < pills.length; k++) {
+      pills[k].classList.remove('hot','dim');
+      pills[k].style.removeProperty('--hot-bg');
+      pills[k].style.removeProperty('--hot-text');
+      pills[k].style.removeProperty('--hot-border');
+      if (pills[k].dataset.id === id) {
+        pills[k].classList.add('hot');
+      } else {
+        pills[k].classList.add('dim');
+      }
+    }
+
+    var cards = document.querySelectorAll('.eco-card');
+    for (var m = 0; m < cards.length; m++) {
+      cards[m].classList.remove('on','dim');
+      if (matchingVerts.indexOf(cards[m].dataset.id) >= 0) {
+        cards[m].classList.add('on');
+      } else {
+        cards[m].classList.add('dim');
+      }
+    }
+
+    var labels = { tool: 'Outil', res: 'Ressource', pers: 'Segment' };
+    var pillEl = document.querySelector('.eco-pill[data-kind="'+kind+'"][data-id="'+id+'"]');
+    var pillName = pillEl ? pillEl.textContent : '';
+    var vertNames = matchingVerts.map(function(vid){ return verts[vid].name; }).join(', ') || 'aucune verticale';
+    info.style.setProperty('--info-color', 'var(--border-secondary)');
+    info.innerHTML = '<span class="eco-info-name">' + labels[kind] + ' · ' + pillName + '</span><span class="eco-info-body">Mobilisé par : ' + vertNames + '.</span>';
+    info.classList.add('show');
+    resetBtn.classList.add('show');
+    activeId = kind + ':' + id;
+  }
+
+  function resetAll() {
+    var cards = document.querySelectorAll('.eco-card');
+    for (var i = 0; i < cards.length; i++) cards[i].classList.remove('on','dim');
+    var pills = document.querySelectorAll('.eco-pill');
+    for (var j = 0; j < pills.length; j++) {
+      pills[j].classList.remove('hot','dim');
+      pills[j].style.removeProperty('--hot-bg');
+      pills[j].style.removeProperty('--hot-text');
+      pills[j].style.removeProperty('--hot-border');
+    }
+    info.classList.remove('show');
+    resetBtn.classList.remove('show');
+    activeId = null;
+  }
+
+  document.querySelectorAll('.eco-card').forEach(function(card) {
+    card.addEventListener('click', function() {
+      if (activeId === card.dataset.id) { resetAll(); return; }
+      paint(card.dataset.id);
+    });
+  });
+
+  document.querySelectorAll('.eco-pill').forEach(function(pill) {
+    pill.addEventListener('click', function() {
+      var key = pill.dataset.kind + ':' + pill.dataset.id;
+      if (activeId === key) { resetAll(); return; }
+      paintFromPill(pill.dataset.kind, pill.dataset.id);
+    });
+  });
+
+  resetBtn.addEventListener('click', resetAll);
+})();
+</script>
+
+</body>
+</html>
