@@ -156,7 +156,7 @@
   .eco-card-price { font-size: 12px; font-weight: 500; margin-top: 10px; }
   .eco-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--c-border); margin-bottom: 10px; }
 
-.eco-info {
+  .eco-info {
     margin-top: 0;
     padding: 0 16px;
     border-radius: var(--radius-lg);
@@ -178,22 +178,23 @@
     border-left-color: var(--info-color, var(--border-secondary));
     overflow-y: auto;
   }
-  .eco-info::-webkit-scrollbar {
-    width: 6px;
-  }
-  .eco-info::-webkit-scrollbar-track {
-    background: transparent;
-  }
-  .eco-info::-webkit-scrollbar-thumb {
-    background: var(--border-secondary);
-    border-radius: 3px;
-  }
-  .eco-info::-webkit-scrollbar-thumb:hover {
-    background: var(--text-tertiary);
-  }
+  .eco-info::-webkit-scrollbar { width: 6px; }
+  .eco-info::-webkit-scrollbar-track { background: transparent; }
+  .eco-info::-webkit-scrollbar-thumb { background: var(--border-secondary); border-radius: 3px; }
+  .eco-info::-webkit-scrollbar-thumb:hover { background: var(--text-tertiary); }
+
   .eco-info-name { font-weight: 500; color: var(--text-primary); }
   .eco-info-sep { margin: 0 10px; color: var(--text-tertiary); }
-  .eco-info-body { display: block; margin-top: 6px; }
+  .eco-info-refs { font-size: 13px; color: var(--text-tertiary); }
+  .eco-info-refs a {
+    color: var(--text-secondary);
+    text-decoration: underline;
+    text-decoration-color: var(--border-secondary);
+    text-underline-offset: 2px;
+    transition: color 0.15s;
+  }
+  .eco-info-refs a:hover { color: var(--text-primary); text-decoration-color: var(--info-color, var(--text-tertiary)); }
+  .eco-info-body { display: block; margin-top: 10px; }
 
   /* Verticales palettes (dark Claude) */
   [data-c="purple"] { --c-bg: #26215C; --c-text: #CECBF6; --c-border: #7F77DD; }
@@ -225,7 +226,6 @@
     .eco-grid { grid-template-columns: 1fr; }
   }
 
-  /* Footer */
   .page-foot {
     margin-top: 48px;
     padding-top: 24px;
@@ -336,98 +336,71 @@
 
 <script>
 (function() {
-var verts = {
-  'eddmon': { 
-    name: 'Eddmon', 
-    tag: 'Cours particuliers', 
-    color: 'gray', 
-    tools: ['swype'], 
-    res: ['tuteurs'], 
-    pers: ['csp','rural'], 
-    role: "Cours individuels à domicile ou en ligne via Swype, du primaire au lycée, avec des tuteurs issus des grandes écoles. Chaque famille est matchée avec un tuteur selon le niveau de l'élève, la matière et les préférences de profil. À domicile, avance immédiate URSSAF (cadre SAP) donc 50% de déduction fiscale immédiate pour le parent. À distance, le cours se fait via Swype, notre plateforme propriétaire qui intègre visio, tableau blanc collaboratif et tablettes graphiques fournies au tuteur comme à l'élève.<br><br>C'est la verticale historique du groupe, la principale source d'acquisition familiale, et le ticket d'entrée naturel vers tout le reste de l'écosystème. Tout élève en cours particulier débloque automatiquement Eddmon Coach en version gratuite, ce qui prolonge l'expérience entre les cours et fidélise la famille sur la durée." 
-  },
-  'coach': { 
-    name: 'Eddmon Coach', 
-    tag: 'Coach IA', 
-    color: 'purple', 
-    tools: ['hub'], 
-    res: ['contenus'], 
-    pers: ['csp','rural'], 
-    role: "Un coach personnel IA disponible 24h/24, exclusivement en 1 to 1, du primaire au lycée. La particularité : c'est le tuteur humain de l'élève qui pilote l'IA. Il peut la borner (\"révise Pythagore ce soir, j'ai vu qu'elle coince\"), orienter les révisions, et s'assurer que l'enfant travaille les bonnes notions entre les sessions. L'IA devient un prolongement du tuteur, pas un chatbot générique.<br><br>Quand l'élève bloque, le Coach le redirige vers une vidéo pédagogique tournée par un tuteur Eddmon. Si la vidéo n'existe pas, l'équipe est notifiée, la produit, et la republie sur YouTube Kids, Instagram et TikTok pour alimenter notre communication virale à coût marginal zéro. Les fiches de cours sont générées à la volée par l'IA, donc aucun coût de production de contenu. Version gratuite débloquée par défaut dès que la famille consomme un autre service payant du groupe. Sinon, abonnement premium à 29€/mois pour débloquer toutes les fonctionnalités. Coach ne fonctionne ni pour la prépa sup, ni pour les formats groupés." 
-  },
-  'north': { 
-    name: 'Eddmon North', 
-    tag: 'Orientation', 
-    color: 'blue', 
-    tools: ['swype'], 
-    res: ['tuteurs'], 
-    pers: ['csp','opportunites'], 
-    role: "La plateforme d'orientation haut de gamme, en deux offres distinctes selon le profil parent.<br><br>Offre 1, \"Appel avec le tuteur de tes rêves\" à 100€/heure. Le parent ou l'ado décrit son profil rêvé à une IA, matching vectoriel dans notre base de 1500+ tuteurs. Le parent sélectionne un créneau, le paiement est bloqué sur Stripe, un lien visio est généré automatiquement. Si le tuteur annule, remboursement instantané ; sinon paiement validé 2h avant l'appel. Full automatisation, zéro friction.<br><br>Offre 2, coaching Parcoursup annuel. 15 minutes découverte offertes, puis accompagnement par un conseiller Eddmon sur toute l'année, selon un playbook standardisé qui garantit la qualité du suivi.<br><br>La verticale monétise directement notre réseau tuteurs à coût marginal quasi-nul et positionne Eddmon sur un segment premium rare." 
-  },
-  'prep': { 
-    name: 'Eddmon Prep', 
-    tag: 'Prépa sup', 
-    color: 'coral', 
-    tools: ['swype','studio'], 
-    res: ['tuteurs','contenus'], 
-    pers: ['csp'], 
-    role: "La plateforme qui garantit aux élèves ambitieux l'entrée dans les formations les plus prestigieuses : Sciences Po, médecine, CPGE, HEC, écoles d'art ou d'ingénieurs. Le parent choisit un format : en ligne via Swype, à domicile, ou en groupe via Eddmon Studio.<br><br>Chaque parcours inclut un tuteur major référent qui pilote la formation de bout en bout, 15 sessions annuelles de coaching personnalisé débloquables selon un planning mensuel précis, et l'option d'acheter des sessions supplémentaires. L'accès illimité à notre base de contenus pédagogiques spécifique au parcours fait la différence : fiches rédigées par les majors, annales corrigées, concours blancs chronométrés. Plus on monte en volume, plus la base devient un asset difficilement réplicable.<br><br>Pricing 3000€/an par parcours. C'est le plus gros panier moyen de l'écosystème avec la plus forte marge." 
-  },
-  'lingo': { 
-    name: 'Eddmon Lingo', 
-    tag: 'Langues natives', 
-    color: 'teal', 
-    tools: ['swype'], 
-    res: ['tuteurs'], 
-    pers: ['international'], 
-    role: "Apprendre une langue dès le plus jeune âge avec des tuteurs natifs du pays ciblé. Cours en ligne uniquement via Swype pour garantir la scalabilité et la disponibilité des natifs.<br><br>Format standard : 3 sessions de 30 minutes par semaine avec un tuteur natif, avec des fiches support pour pratiquer entre les sessions (vocabulaire, grammaire, culture). L'intensité régulière et le format court permettent une progression rapide sans surcharger l'emploi du temps de l'enfant.<br><br>Pricing 150€/mois, formules payées au mois, au trimestre ou à l'année. Lingo joue un rôle stratégique de sourcing pour Eddmon Pair : les tuteurs natifs qui souhaitent venir vivre en France deviennent automatiquement les candidats au pair pour les familles clientes du groupe." 
-  },
-  'studio-v': { 
-    name: 'Eddmon Studio', 
-    tag: 'Cours en groupe', 
-    color: 'amber', 
-    tools: [], 
-    res: ['tuteurs'], 
-    pers: ['groupe'], 
-    role: "Plateforme de réservation de cours groupés de 2 à 4 élèves maximum chez un tuteur vérifié. Le tuteur déclare qu'il reçoit chez lui, son appartement et son profil sont vérifiés automatiquement. Les familles cherchent un tuteur star dans leur zone, comparent les profils et réservent un créneau. Les élèves se retrouvent chez le tuteur pour un cours en petit groupe, souvent entre amis, ce qui réduit la barrière psychologique du cours solo.<br><br>Pricing 16€/heure par élève. Pas de déduction fiscale, mais un tarif beaucoup plus accessible qui ouvre le marché aux budgets plus légers. Studio est à la fois une verticale commerciale autonome ET une infrastructure stratégique pour le groupe : l'option \"en groupe\" de Prep et Tempo passe par cette interface." 
-  },
-  'tempo': { 
-    name: 'Eddmon Tempo', 
-    tag: 'Musique', 
-    color: 'pink', 
-    tools: ['swype','studio'], 
-    res: ['tuteurs'], 
-    pers: ['passion'], 
-    role: "Apprendre tous les instruments en quelques cours, sans pression, par passion ou par ambition. Trois formats au choix : à domicile pour la déduction fiscale 50%, en ligne via Swype, ou en groupe via Eddmon Studio.<br><br>La particularité : le réseau est élargi au-delà des étudiants majors pour inclure des profs expérimentés type Superprof (concertistes, musiciens professionnels) pour garantir une qualité pédagogique sur tous les instruments. Pricing 25€/heure pour toutes les options. La verticale élargit notre marché au-delà du scolaire pur et renforce l'image d'éveil culturel et artistique du groupe." 
-  },
-  'nest': { 
-    name: 'Eddmon Nest', 
-    tag: 'Babysitting éducatif', 
-    color: 'green', 
-    tools: [], 
-    res: ['tuteurs'], 
-    pers: ['csp','debordes'], 
-    role: "Le babysitting qui éduque, par des étudiants des meilleures écoles. Ce n'est pas de la simple surveillance, c'est un temps éducatif actif : lecture, aide aux devoirs, éveil. Même réseau que celui des cours particuliers Eddmon, avec des étudiants qui viennent à domicile.<br><br>Pricing 14,90€/heure avec avance immédiate URSSAF (cadre SAP), ramenant le prix net effectif autour de 7,45€/heure. Nest capture la famille dès le plus jeune âge de l'enfant, crée une entrée précoce dans l'écosystème, et prépare la transition naturelle vers les cours particuliers classiques." 
-  },
-  'pair': { 
-    name: 'Eddmon Pair', 
-    tag: 'Au pair', 
-    color: 'purple', 
-    tools: [], 
-    res: ['tuteurs'], 
-    pers: ['international','ecoles'], 
-    role: "Un étudiant étranger qui vit chez la famille sur une durée longue et accompagne les enfants au quotidien : garde, devoirs, immersion linguistique. Le sourcing se fait via les tuteurs natifs de Eddmon Lingo qui souhaitent venir en France, offrant un vivier qualifié et déjà évalué par nos soins.<br><br>Le matching vise des familles très aisées (écoles type EIB Monceau, Jeannine Manuel), ouvertes à l'international. Frais d'inscription offerts si la famille consomme déjà un autre service du Hub pour inciter au cross-sell. C'est la verticale qui capture la famille sur la durée la plus longue avec le panier moyen le plus élevé." 
-  },
-  'casa': { 
-    name: 'Eddmon Casa', 
-    tag: 'Ménage premium', 
-    color: 'gray', 
-    tools: [], 
-    res: [], 
-    pers: ['debordes'], 
-    role: "Le ménage premium inspiré de Shiva pour l'excellence et WeCasa pour l'expérience utilisateur. L'objectif est de devenir le point de contact unique pour les familles CSP+ déjà acquises. Les agents sont recrutés, formés aux standards de l'hôtellerie (propreté, discrétion) et gérés via la plateforme.<br><br>Pricing autour de 10€/heure (net après avantage fiscal SAP). Casa maximise le panier moyen par famille et renforce l'image d'écosystème global où Eddmon gère autant l'éducation que l'intendance de la maison. C'est un pur produit d'upsell sur notre base existante." 
-  }
-};
+  var verts = {
+    'eddmon': {
+      name: 'Eddmon', tag: 'Cours particuliers', color: 'gray',
+      tools: ['swype'], res: ['tuteurs'], pers: ['csp','rural'],
+      refs: [],
+      role: "Cours individuels à domicile ou en ligne via Swype, du primaire au lycée, avec des tuteurs issus des grandes écoles. Chaque famille est matchée avec un tuteur selon le niveau de l'élève, la matière et les préférences de profil. À domicile, avance immédiate URSSAF (cadre SAP) donc 50% de déduction fiscale immédiate pour le parent. À distance, le cours se fait via Swype, notre plateforme propriétaire qui intègre visio, tableau blanc collaboratif et tablettes graphiques fournies au tuteur comme à l'élève.<br><br>C'est la verticale historique du groupe, la principale source d'acquisition familiale, et le ticket d'entrée naturel vers tout le reste de l'écosystème. Tout élève en cours particulier débloque automatiquement Eddmon Coach en version gratuite, ce qui prolonge l'expérience entre les cours et fidélise la famille sur la durée."
+    },
+    'coach': {
+      name: 'Eddmon Coach', tag: 'Coach IA', color: 'purple',
+      tools: ['hub'], res: ['contenus'], pers: ['csp','rural'],
+      refs: [{name: 'eliott.app', url: 'https://www.eliott.app/'}],
+      role: "Un coach personnel IA disponible 24h/24, exclusivement en 1 to 1, du primaire au lycée. La particularité : c'est le tuteur humain de l'élève qui pilote l'IA. Il peut la borner (« révise Pythagore ce soir, j'ai vu qu'elle coince »), orienter les révisions, et s'assurer que l'enfant travaille les bonnes notions entre les sessions. L'IA devient un prolongement du tuteur, pas un chatbot générique, et elle est entraînée sur les programmes officiels de l'Éducation nationale pour garantir la conformité pédagogique.<br><br>Quand l'élève bloque, le Coach le redirige vers une vidéo pédagogique tournée par un tuteur Eddmon. Si la vidéo n'existe pas, l'équipe est notifiée, la produit, et la republie sur YouTube Kids, Instagram et TikTok pour alimenter notre communication virale à coût marginal zéro. Les fiches de cours sont générées à la volée par l'IA, donc aucun coût de production de contenu.<br><br>Version gratuite débloquée par défaut dès que la famille consomme un autre service payant du groupe. Sinon, abonnement premium à 29€/mois. Coach ne fonctionne ni pour la prépa sup, ni pour les formats groupés."
+    },
+    'north': {
+      name: 'Eddmon North', tag: 'Orientation', color: 'blue',
+      tools: ['swype'], res: ['tuteurs'], pers: ['csp','opportunites'],
+      refs: [],
+      role: "La plateforme d'orientation haut de gamme, en deux offres distinctes selon le profil parent.<br><br>Offre 1, « Appel avec le tuteur de tes rêves » à 100€/heure. Le parent ou l'ado décrit son profil rêvé à une IA, matching vectoriel dans notre base de 1500+ tuteurs avec leurs cursus et classements. Le parent sélectionne un créneau, le paiement est bloqué sur Stripe, un lien visio est généré automatiquement, pas de coordonnées échangées. Si le tuteur annule, remboursement instantané ; sinon paiement validé 2h avant l'appel. Full automatisation, zéro friction.<br><br>Offre 2, coaching Parcoursup annuel. 15 minutes découverte offertes, puis accompagnement par un conseiller Eddmon sur toute l'année, selon un playbook standardisé qui garantit la qualité du suivi.<br><br>La verticale monétise directement notre réseau tuteurs à coût marginal quasi-nul et positionne Eddmon sur un segment premium rare."
+    },
+    'prep': {
+      name: 'Eddmon Prep', tag: 'Prépa sup', color: 'coral',
+      tools: ['swype','studio'], res: ['tuteurs','contenus'], pers: ['csp'],
+      refs: [],
+      role: "La plateforme qui garantit aux élèves ambitieux l'entrée dans les formations les plus prestigieuses : Sciences Po, médecine, CPGE, HEC, écoles d'art ou d'ingénieurs. Le parent choisit un format : en ligne via Swype, à domicile, ou en groupe via Eddmon Studio.<br><br>Chaque parcours inclut un tuteur major référent qui pilote la formation de bout en bout, 15 sessions annuelles de coaching personnalisé débloquables selon un planning mensuel précis, et l'option d'acheter des sessions supplémentaires. L'accès illimité à notre base de contenus pédagogiques spécifique au parcours fait la différence : les fiches, annales corrigées et concours blancs sont directement rédigés par les majors de chaque formation qui nous fournissent leurs propres contenus. Plus on monte en volume, plus la base devient un asset difficilement réplicable par la concurrence.<br><br>Pricing 3000€/an par parcours. C'est le plus gros panier moyen de l'écosystème avec la plus forte marge."
+    },
+    'lingo': {
+      name: 'Eddmon Lingo', tag: 'Langues natives', color: 'teal',
+      tools: ['swype'], res: ['tuteurs'], pers: ['international'],
+      refs: [],
+      role: "Apprendre une langue dès le plus jeune âge avec des tuteurs natifs du pays ciblé. Cours en ligne uniquement via Swype pour garantir la scalabilité et la disponibilité des natifs. Le sourcing se fait par recrutement d'étudiants dans les facultés étrangères, ce qui nous permet de garder une marge solide tout en offrant des natifs premium.<br><br>Format standard : 3 sessions de 30 minutes par semaine avec un tuteur natif, avec des fiches support pour pratiquer entre les sessions (vocabulaire, grammaire, culture). L'intensité régulière et le format court permettent une progression rapide sans surcharger l'emploi du temps de l'enfant.<br><br>Pricing 150€/mois, formules payées au mois, au trimestre ou à l'année. Lingo joue un rôle stratégique de sourcing pour Eddmon Pair : les tuteurs natifs qui souhaitent venir vivre en France deviennent automatiquement les candidats au pair pour les familles clientes du groupe."
+    },
+    'studio-v': {
+      name: 'Eddmon Studio', tag: 'Cours en groupe', color: 'amber',
+      tools: [], res: ['tuteurs'], pers: ['groupe'],
+      refs: [{name: 'meetinclass.com', url: 'https://www.meetinclass.com/'}],
+      role: "Plateforme de réservation de cours groupés de 2 à 4 élèves maximum chez un tuteur vérifié. Le tuteur déclare qu'il reçoit chez lui, son appartement et son profil sont vérifiés automatiquement. Les familles cherchent un tuteur star dans leur zone, comparent les profils et réservent un créneau. Les élèves se retrouvent chez le tuteur pour un cours en petit groupe, souvent entre amis, ce qui réduit la barrière psychologique du cours solo.<br><br>Pricing 16€/heure par élève. Pas de déduction fiscale, mais un tarif beaucoup plus accessible qui ouvre le marché aux budgets plus légers. Studio est à la fois une verticale commerciale autonome ET une infrastructure stratégique pour le groupe : l'option « en groupe » de Prep et Tempo passe par cette interface."
+    },
+    'tempo': {
+      name: 'Eddmon Tempo', tag: 'Musique', color: 'pink',
+      tools: ['swype','studio'], res: ['tuteurs'], pers: ['passion'],
+      refs: [],
+      role: "Apprendre tous les instruments en quelques cours, sans pression, par passion ou par ambition. Trois formats au choix : à domicile pour la déduction fiscale 50%, en ligne via Swype, ou en groupe via Eddmon Studio.<br><br>La particularité : le réseau est élargi au-delà des étudiants majors pour inclure des profs expérimentés type Superprof (concertistes, musiciens professionnels) pour garantir une qualité pédagogique sur tous les instruments. Pricing 25€/heure pour toutes les options. La verticale élargit notre marché au-delà du scolaire pur et renforce l'image d'éveil culturel et artistique du groupe."
+    },
+    'nest': {
+      name: 'Eddmon Nest', tag: 'Babysitting éducatif', color: 'green',
+      tools: [], res: ['tuteurs'], pers: ['csp','debordes'],
+      refs: [],
+      role: "Le babysitting qui éduque, par des étudiants des meilleures écoles. Ce n'est pas de la simple surveillance, c'est un temps éducatif actif : lecture, aide aux devoirs, éveil. Même réseau que celui des cours particuliers Eddmon, avec des étudiants qui viennent à domicile.<br><br>Pricing 14,90€/heure avec avance immédiate URSSAF (cadre SAP), ramenant le prix net effectif autour de 7,45€/heure. Nest capture la famille dès le plus jeune âge de l'enfant, crée une entrée précoce dans l'écosystème, et prépare la transition naturelle vers les cours particuliers classiques."
+    },
+    'pair': {
+      name: 'Eddmon Pair', tag: 'Au pair', color: 'purple',
+      tools: [], res: ['tuteurs'], pers: ['international','ecoles'],
+      refs: [],
+      role: "Un étudiant étranger qui vit chez la famille sur une durée longue et accompagne les enfants au quotidien : garde, devoirs, immersion linguistique. Le sourcing se fait via les tuteurs natifs de Eddmon Lingo qui souhaitent venir en France, offrant un vivier qualifié et déjà évalué par nos soins.<br><br>Le matching vise des familles très aisées (écoles type EIB Monceau, Jeannine Manuel), ouvertes à l'international. Synergie stratégique majeure avec Le Kompa : nous avons accès direct aux écoles primaires privées hors contrat les plus onéreuses de Paris, ce qui nous donne une source de clients gratuits et aisés inégalable sur le marché.<br><br>Frais d'inscription offerts si la famille consomme déjà un autre service du Hub pour inciter au cross-sell. C'est la verticale qui capture la famille sur la durée la plus longue avec le panier moyen le plus élevé."
+    },
+    'casa': {
+      name: 'Eddmon Casa', tag: 'Ménage premium', color: 'gray',
+      tools: [], res: [], pers: ['debordes'],
+      refs: [
+        {name: 'shiva.fr', url: 'https://www.shiva.fr/'},
+        {name: 'wecasa.fr', url: 'https://www.wecasa.fr/'}
+      ],
+      role: "Le ménage premium inspiré de Shiva pour l'excellence et WeCasa pour l'expérience utilisateur. L'objectif est de devenir le point de contact unique pour les familles CSP+ déjà acquises. Les agents sont recrutés, formés aux standards de l'hôtellerie (propreté, discrétion) et gérés via la plateforme.<br><br>Pricing autour de 10€/heure (net après avantage fiscal SAP). Casa maximise le panier moyen par famille et renforce l'image d'écosystème global où Eddmon gère autant l'éducation que l'intendance de la maison. C'est un pur produit d'upsell sur notre base existante."
+    }
+  };
 
   var colors = {
     purple: ['#26215C','#CECBF6','#7F77DD'],
@@ -443,6 +416,14 @@ var verts = {
   var info = document.getElementById('eco-info');
   var resetBtn = document.getElementById('eco-reset');
   var activeId = null;
+
+  function buildRefsHtml(refs) {
+    if (!refs || !refs.length) return '';
+    var links = refs.map(function(r) {
+      return '<a href="' + r.url + '" target="_blank" rel="noopener">' + r.name + '</a>';
+    }).join(', ');
+    return '<span class="eco-info-sep">·</span><span class="eco-info-refs">Réf : ' + links + '</span>';
+  }
 
   function paint(vertId) {
     var v = verts[vertId];
@@ -478,8 +459,13 @@ var verts = {
     }
 
     info.style.setProperty('--info-color', palette[2]);
-    info.innerHTML = '<span class="eco-info-name">' + v.name + '</span><span class="eco-info-sep">·</span>' + v.tag + '<span class="eco-info-body">' + v.role + '</span>';
+    info.innerHTML =
+      '<span class="eco-info-name">' + v.name + '</span>' +
+      '<span class="eco-info-sep">·</span>' + v.tag +
+      buildRefsHtml(v.refs) +
+      '<span class="eco-info-body">' + v.role + '</span>';
     info.classList.add('show');
+    info.scrollTop = 0;
     resetBtn.classList.add('show');
     activeId = vertId;
   }
@@ -521,6 +507,7 @@ var verts = {
     info.style.setProperty('--info-color', 'var(--border-secondary)');
     info.innerHTML = '<span class="eco-info-name">' + labels[kind] + ' · ' + pillName + '</span><span class="eco-info-body">Mobilisé par : ' + vertNames + '.</span>';
     info.classList.add('show');
+    info.scrollTop = 0;
     resetBtn.classList.add('show');
     activeId = kind + ':' + id;
   }
