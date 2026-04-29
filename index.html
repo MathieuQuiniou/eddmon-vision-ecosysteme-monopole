@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>L'écosystème Eddmon</title>
-<meta name="description" content="Vision commerciale du groupe Eddmon. Dix verticales, deux piliers invisibles, trois outils transverses.">
+<meta name="description" content="Vision commerciale du groupe Eddmon. Seize verticales, deux piliers invisibles, trois outils transverses, et les synergies Le Kompa.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -155,9 +155,25 @@
   .eco-card-tag { font-size: 12px; line-height: 1.35; opacity: 0.82; margin-top: 3px; }
   .eco-card-price { font-size: 12px; font-weight: 500; margin-top: 10px; }
   .eco-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--c-border); margin-bottom: 10px; }
+  .eco-card-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 9px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 3px 7px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--c-text);
+    opacity: 0.85;
+  }
 
+  /* Inline info panel inserted after the row of clicked card */
   .eco-info {
-    margin-top: 0;
+    grid-column: 1 / -1;
+    margin: 4px 0;
     padding: 0 16px;
     border-radius: var(--radius-lg);
     background: var(--bg-card);
@@ -166,7 +182,7 @@
     line-height: 1.6;
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.25s, padding 0.25s, margin-top 0.25s;
+    transition: max-height 0.25s, padding 0.25s, margin 0.25s;
     border-left: 3px solid transparent;
     scrollbar-width: thin;
     scrollbar-color: var(--border-secondary) transparent;
@@ -174,7 +190,7 @@
   .eco-info.show {
     max-height: 160px;
     padding: 16px 18px;
-    margin-top: 18px;
+    margin: 8px 0 8px;
     border-left-color: var(--info-color, var(--border-secondary));
     overflow-y: auto;
   }
@@ -197,14 +213,19 @@
   .eco-info-body { display: block; margin-top: 10px; }
 
   /* Verticales palettes (dark Claude) */
-  [data-c="purple"] { --c-bg: #26215C; --c-text: #CECBF6; --c-border: #7F77DD; }
-  [data-c="teal"]   { --c-bg: #04342C; --c-text: #9FE1CB; --c-border: #1D9E75; }
-  [data-c="coral"]  { --c-bg: #4A1B0C; --c-text: #F5C4B3; --c-border: #D85A30; }
-  [data-c="pink"]   { --c-bg: #4B1528; --c-text: #F4C0D1; --c-border: #D4537E; }
-  [data-c="gray"]   { --c-bg: #3a3a37; --c-text: #D3D1C7; --c-border: #888780; }
-  [data-c="blue"]   { --c-bg: #042C53; --c-text: #B5D4F4; --c-border: #378ADD; }
-  [data-c="green"]  { --c-bg: #173404; --c-text: #C0DD97; --c-border: #639922; }
-  [data-c="amber"]  { --c-bg: #412402; --c-text: #FAC775; --c-border: #BA7517; }
+  [data-c="purple"]   { --c-bg: #26215C; --c-text: #CECBF6; --c-border: #7F77DD; }
+  [data-c="teal"]     { --c-bg: #04342C; --c-text: #9FE1CB; --c-border: #1D9E75; }
+  [data-c="coral"]    { --c-bg: #4A1B0C; --c-text: #F5C4B3; --c-border: #D85A30; }
+  [data-c="pink"]     { --c-bg: #4B1528; --c-text: #F4C0D1; --c-border: #D4537E; }
+  [data-c="gray"]     { --c-bg: #3a3a37; --c-text: #D3D1C7; --c-border: #888780; }
+  [data-c="blue"]     { --c-bg: #042C53; --c-text: #B5D4F4; --c-border: #378ADD; }
+  [data-c="green"]    { --c-bg: #173404; --c-text: #C0DD97; --c-border: #639922; }
+  [data-c="amber"]    { --c-bg: #412402; --c-text: #FAC775; --c-border: #BA7517; }
+  [data-c="indigo"]   { --c-bg: #1B1F4D; --c-text: #B5BEEB; --c-border: #5C6BCF; }
+  [data-c="rose"]     { --c-bg: #4F1424; --c-text: #F2B5C5; --c-border: #C04567; }
+  [data-c="lime"]     { --c-bg: #2A3D08; --c-text: #D2E098; --c-border: #88A638; }
+  [data-c="cyan"]     { --c-bg: #033540; --c-text: #9DD6E2; --c-border: #2392B0; }
+  [data-c="orange"]   { --c-bg: #4D2400; --c-text: #FAB97A; --c-border: #D98030; }
 
   /* Responsive */
   @media (max-width: 900px) {
@@ -240,14 +261,14 @@
 
 <div class="page">
   <div class="page-head">
-    <div class="page-kicker">Groupe Trousseau, vision Eddmon</div>
+    <div class="page-kicker">Groupe Trousseau, vision Eddmon, V2</div>
     <h1 class="page-title">L'écosystème Eddmon</h1>
-    <p class="page-sub">Dix verticales commerciales, deux piliers invisibles, trois outils transverses. Une famille CSP+ qui reste dans un seul hub pour toute la vie éducative et logistique de ses enfants.</p>
+    <p class="page-sub">Seize verticales commerciales, deux piliers invisibles, trois outils transverses, et les synergies avec Le Kompa. Une famille CSP+ qui reste dans un seul hub pour toute la vie éducative et logistique de ses enfants.</p>
   </div>
 
   <div class="eco">
     <div class="eco-title-row">
-      <div class="eco-instruction">Clique sur une offre, un outil, une ressource ou un segment pour voir les connexions.</div>
+      <div class="eco-instruction">Clique sur une offre, un outil, une ressource, un segment ou une synergie pour voir les connexions.</div>
       <button class="eco-reset" id="eco-reset" type="button">Tout afficher</button>
     </div>
 
@@ -263,58 +284,25 @@
       <div class="eco-label">Outils transverses</div>
       <div class="eco-pills">
         <div class="eco-pill" data-kind="tool" data-id="swype">Swype, visio + whiteboard</div>
+        <div class="eco-pill" data-kind="tool" data-id="connect">Eddmon Connect, réservation</div>
         <div class="eco-pill" data-kind="tool" data-id="studio">Eddmon Studio, cours chez le prof</div>
         <div class="eco-pill" data-kind="tool" data-id="hub">Hub familial</div>
       </div>
     </div>
 
     <div class="eco-block">
-      <div class="eco-label">Verticales commerciales</div>
-      <div class="eco-grid" id="eco-grid">
-        <div class="eco-card" data-c="gray" data-id="eddmon">
-          <div><div class="eco-dot"></div><div class="eco-card-name">Eddmon</div><div class="eco-card-tag">Cours particuliers</div></div>
-          <div class="eco-card-price">Standard + 50%</div>
-        </div>
-        <div class="eco-card" data-c="purple" data-id="coach">
-          <div><div class="eco-dot"></div><div class="eco-card-name">Eddmon Coach</div><div class="eco-card-tag">Coach IA</div></div>
-          <div class="eco-card-price">29€/mois ou gratuit</div>
-        </div>
-        <div class="eco-card" data-c="blue" data-id="north">
-          <div><div class="eco-dot"></div><div class="eco-card-name">Eddmon North</div><div class="eco-card-tag">Orientation</div></div>
-          <div class="eco-card-price">100€/h + forfait</div>
-        </div>
-        <div class="eco-card" data-c="coral" data-id="prep">
-          <div><div class="eco-dot"></div><div class="eco-card-name">Eddmon Prep</div><div class="eco-card-tag">Prépa sup</div></div>
-          <div class="eco-card-price">3000€/an</div>
-        </div>
-        <div class="eco-card" data-c="teal" data-id="lingo">
-          <div><div class="eco-dot"></div><div class="eco-card-name">Eddmon Lingo</div><div class="eco-card-tag">Langues natives</div></div>
-          <div class="eco-card-price">150€/mois</div>
-        </div>
-        <div class="eco-card" data-c="amber" data-id="studio-v">
-          <div><div class="eco-dot"></div><div class="eco-card-name">Eddmon Studio</div><div class="eco-card-tag">Cours en groupe</div></div>
-          <div class="eco-card-price">16€/h</div>
-        </div>
-        <div class="eco-card" data-c="pink" data-id="tempo">
-          <div><div class="eco-dot"></div><div class="eco-card-name">Eddmon Tempo</div><div class="eco-card-tag">Musique</div></div>
-          <div class="eco-card-price">25€/h</div>
-        </div>
-        <div class="eco-card" data-c="green" data-id="nest">
-          <div><div class="eco-dot"></div><div class="eco-card-name">Eddmon Nest</div><div class="eco-card-tag">Babysitting éducatif</div></div>
-          <div class="eco-card-price">14,90€/h</div>
-        </div>
-        <div class="eco-card" data-c="purple" data-id="pair">
-          <div><div class="eco-dot"></div><div class="eco-card-name">Eddmon Pair</div><div class="eco-card-tag">Au pair</div></div>
-          <div class="eco-card-price">Premium</div>
-        </div>
-        <div class="eco-card" data-c="gray" data-id="casa">
-          <div><div class="eco-dot"></div><div class="eco-card-name">Eddmon Casa</div><div class="eco-card-tag">Ménage premium</div></div>
-          <div class="eco-card-price">~10€/h</div>
-        </div>
+      <div class="eco-label">Synergies Le Kompa</div>
+      <div class="eco-pills">
+        <div class="eco-pill" data-kind="syn" data-id="snack-syn">Goûters mutualisés</div>
+        <div class="eco-pill" data-kind="syn" data-id="kit-syn">Fournitures mutualisées</div>
+        <div class="eco-pill" data-kind="syn" data-id="ecoles-syn">Accès écoles partenaires</div>
       </div>
     </div>
 
-    <div class="eco-info" id="eco-info"></div>
+    <div class="eco-block">
+      <div class="eco-label">Verticales commerciales</div>
+      <div class="eco-grid" id="eco-grid"></div>
+    </div>
 
     <div class="eco-block" style="margin-top: 20px;">
       <div class="eco-label">Segments de marché</div>
@@ -327,11 +315,14 @@
         <div class="eco-pill" data-kind="pers" data-id="passion">Familles passion</div>
         <div class="eco-pill" data-kind="pers" data-id="opportunites">Créateurs d'opportunités</div>
         <div class="eco-pill" data-kind="pers" data-id="debordes">Parents actifs débordés</div>
+        <div class="eco-pill" data-kind="pers" data-id="expat">Familles expatriées</div>
+        <div class="eco-pill" data-kind="pers" data-id="riviera">Familles Riviera et Monaco</div>
+        <div class="eco-pill" data-kind="pers" data-id="culture">Familles passion culture</div>
       </div>
     </div>
   </div>
 
-  <div class="page-foot">Document de travail interne · Groupe Trousseau</div>
+  <div class="page-foot">Document de travail interne · Groupe Trousseau · Version 2</div>
 </div>
 
 <script>
@@ -339,81 +330,164 @@
   var verts = {
     'eddmon': {
       name: 'Eddmon', tag: 'Cours particuliers', color: 'gray',
-      tools: ['swype'], res: ['tuteurs'], pers: ['csp','rural'],
+      tools: ['swype','connect'], res: ['tuteurs'], pers: ['csp','rural'], syn: [], price: 'Standard + 50%',
       refs: [],
-      role: "Cours individuels à domicile ou en ligne via Swype, du primaire au lycée, avec des tuteurs issus des grandes écoles. Chaque famille est matchée avec un tuteur selon le niveau de l'élève, la matière et les préférences de profil. À domicile, avance immédiate URSSAF (cadre SAP) donc 50% de déduction fiscale immédiate pour le parent. À distance, le cours se fait via Swype, notre plateforme propriétaire qui intègre visio, tableau blanc collaboratif et tablettes graphiques fournies au tuteur comme à l'élève.<br><br>C'est la verticale historique du groupe, la principale source d'acquisition familiale, et le ticket d'entrée naturel vers tout le reste de l'écosystème. Tout élève en cours particulier débloque automatiquement Eddmon Coach en version gratuite, ce qui prolonge l'expérience entre les cours et fidélise la famille sur la durée."
+      role: "Cours individuels à domicile ou en ligne via Swype, du primaire au lycée, avec des tuteurs issus des grandes écoles. Chaque famille est matchée avec un tuteur selon le niveau de l'élève, la matière et les préférences de profil. À domicile, avance immédiate URSSAF (cadre SAP) donc 50% de déduction fiscale immédiate pour le parent. À distance, le cours se fait via Swype, notre plateforme propriétaire qui intègre visio, tableau blanc collaboratif et tablettes graphiques fournies au tuteur comme à l'élève. Réservation des créneaux via Eddmon Connect.<br><br>C'est la verticale historique du groupe, la principale source d'acquisition familiale, et le ticket d'entrée naturel vers tout le reste de l'écosystème. Tout élève en cours particulier débloque automatiquement Eddmon Coach en version gratuite, ce qui prolonge l'expérience entre les cours et fidélise la famille sur la durée."
     },
     'coach': {
-      name: 'Eddmon Coach', tag: 'Coach IA', color: 'purple',
-      tools: ['hub'], res: ['contenus'], pers: ['csp','rural'],
+      name: 'Eddmon Coach', tag: 'Coach IA + révisions', color: 'purple',
+      tools: ['hub'], res: ['contenus'], pers: ['csp','rural'], syn: [], price: '29€/mois ou gratuit',
       refs: [{name: 'eliott.app', url: 'https://www.eliott.app/'}],
-      role: "Un coach personnel IA disponible 24h/24, exclusivement en 1 to 1, du primaire au lycée. La particularité : c'est le tuteur humain de l'élève qui pilote l'IA. Il peut la borner (« révise Pythagore ce soir, j'ai vu qu'elle coince »), orienter les révisions, et s'assurer que l'enfant travaille les bonnes notions entre les sessions. L'IA devient un prolongement du tuteur, pas un chatbot générique, et elle est entraînée sur les programmes officiels de l'Éducation nationale pour garantir la conformité pédagogique.<br><br>Quand l'élève bloque, le Coach le redirige vers une vidéo pédagogique tournée par un tuteur Eddmon. Si la vidéo n'existe pas, l'équipe est notifiée, la produit, et la republie sur YouTube Kids, Instagram et TikTok pour alimenter notre communication virale à coût marginal zéro. Les fiches de cours sont générées à la volée par l'IA, donc aucun coût de production de contenu.<br><br>Version gratuite débloquée par défaut dès que la famille consomme un autre service payant du groupe. Sinon, abonnement premium à 29€/mois. Coach ne fonctionne ni pour la prépa sup, ni pour les formats groupés."
+      role: "Une plateforme d'apprentissage complète en deux modes complémentaires.<br><br><strong>Mode Coacher</strong> : un coach personnel IA disponible 24h/24, exclusivement en 1 to 1, du primaire au lycée. Le tuteur humain de l'élève pilote l'IA, la borne (« révise Pythagore ce soir, j'ai vu qu'elle coince »), oriente les révisions, et s'assure que l'enfant travaille les bonnes notions entre les sessions. Quand l'élève bloque, le Coach le redirige vers une vidéo pédagogique tournée par un tuteur Eddmon.<br><br><strong>Mode Réviser</strong> : une bibliothèque de fiches, exercices et QCM accessible en autonomie, structurée par niveau et matière. L'élève qui veut bosser seul avant un contrôle a tout sous la main, sans coaching, comme une plateforme de révision classique en mieux.<br><br>L'IA est entraînée sur les programmes officiels de l'Éducation nationale. Les fiches sont générées à la volée par l'IA, donc aucun coût de production de contenu. Les vidéos pédagogiques alimentent aussi notre communication virale sur YouTube Kids, Instagram et TikTok. Version gratuite débloquée par défaut dès qu'un autre service payant du groupe est consommé. Sinon, abonnement premium à 29€/mois."
     },
     'north': {
       name: 'Eddmon North', tag: 'Orientation', color: 'blue',
-      tools: ['swype'], res: ['tuteurs'], pers: ['csp','opportunites'],
+      tools: ['swype','connect'], res: ['tuteurs'], pers: ['csp','opportunites'], syn: [], price: '100€/h + forfait',
       refs: [],
-      role: "La plateforme d'orientation haut de gamme, en deux offres distinctes selon le profil parent.<br><br>Offre 1, « Appel avec le tuteur de tes rêves » à 100€/heure. Le parent ou l'ado décrit son profil rêvé à une IA, matching vectoriel dans notre base de 1500+ tuteurs avec leurs cursus et classements. Le parent sélectionne un créneau, le paiement est bloqué sur Stripe, un lien visio est généré automatiquement, pas de coordonnées échangées. Si le tuteur annule, remboursement instantané ; sinon paiement validé 2h avant l'appel. Full automatisation, zéro friction.<br><br>Offre 2, coaching Parcoursup annuel. 15 minutes découverte offertes, puis accompagnement par un conseiller Eddmon sur toute l'année, selon un playbook standardisé qui garantit la qualité du suivi.<br><br>La verticale monétise directement notre réseau tuteurs à coût marginal quasi-nul et positionne Eddmon sur un segment premium rare."
+      role: "La plateforme d'orientation haut de gamme, en deux offres distinctes selon le profil parent.<br><br>Offre 1, « Appel avec le tuteur de tes rêves » à 100€/heure. Le parent ou l'ado décrit son profil rêvé à une IA, matching vectoriel dans notre base de 1500+ tuteurs avec leurs cursus et classements. La réservation et le paiement se font via Eddmon Connect, avec un lien visio Swype généré automatiquement. Si le tuteur annule, remboursement instantané ; sinon paiement validé 2h avant l'appel.<br><br>Offre 2, coaching Parcoursup annuel. 15 minutes découverte offertes, puis accompagnement par un conseiller Eddmon sur toute l'année, selon un playbook standardisé qui garantit la qualité du suivi.<br><br>La verticale monétise directement notre réseau tuteurs à coût marginal quasi-nul et positionne Eddmon sur un segment premium rare."
     },
     'prep': {
       name: 'Eddmon Prep', tag: 'Prépa sup', color: 'coral',
-      tools: ['swype','studio'], res: ['tuteurs','contenus'], pers: ['csp'],
+      tools: ['swype','connect','studio'], res: ['tuteurs','contenus'], pers: ['csp'], syn: [], price: '3000€/an',
       refs: [],
-      role: "La plateforme qui garantit aux élèves ambitieux l'entrée dans les formations les plus prestigieuses : Sciences Po, médecine, CPGE, HEC, écoles d'art ou d'ingénieurs. Le parent choisit un format : en ligne via Swype, à domicile, ou en groupe via Eddmon Studio.<br><br>Chaque parcours inclut un tuteur major référent qui pilote la formation de bout en bout, 15 sessions annuelles de coaching personnalisé débloquables selon un planning mensuel précis, et l'option d'acheter des sessions supplémentaires. L'accès illimité à notre base de contenus pédagogiques spécifique au parcours fait la différence : les fiches, annales corrigées et concours blancs sont directement rédigés par les majors de chaque formation qui nous fournissent leurs propres contenus. Plus on monte en volume, plus la base devient un asset difficilement réplicable par la concurrence.<br><br>Pricing 3000€/an par parcours. C'est le plus gros panier moyen de l'écosystème avec la plus forte marge."
+      role: "La plateforme qui garantit aux élèves ambitieux l'entrée dans les formations les plus prestigieuses : Sciences Po, médecine, CPGE, HEC, écoles d'art ou d'ingénieurs. Le parent choisit un format : en ligne via Swype, à domicile, ou en groupe via Eddmon Studio. Toutes les sessions de coaching se réservent depuis Eddmon Connect.<br><br>Chaque parcours inclut un tuteur major référent qui pilote la formation de bout en bout, 15 sessions annuelles de coaching personnalisé débloquables selon un planning mensuel précis, et l'option d'acheter des sessions supplémentaires. L'accès illimité à notre base de contenus pédagogiques spécifique au parcours fait la différence : les fiches, annales corrigées et concours blancs sont directement rédigés par les majors de chaque formation qui nous fournissent leurs propres contenus. Plus on monte en volume, plus la base devient un asset difficilement réplicable par la concurrence.<br><br>Pricing 3000€/an par parcours. C'est le plus gros panier moyen de l'écosystème avec la plus forte marge."
     },
     'lingo': {
       name: 'Eddmon Lingo', tag: 'Langues natives', color: 'teal',
-      tools: ['swype'], res: ['tuteurs'], pers: ['international'],
+      tools: ['swype','connect'], res: ['tuteurs'], pers: ['international'], syn: [], price: '150€/mois',
       refs: [],
-      role: "Apprendre une langue dès le plus jeune âge avec des tuteurs natifs du pays ciblé. Cours en ligne uniquement via Swype pour garantir la scalabilité et la disponibilité des natifs. Le sourcing se fait par recrutement d'étudiants dans les facultés étrangères, ce qui nous permet de garder une marge solide tout en offrant des natifs premium.<br><br>Format standard : 3 sessions de 30 minutes par semaine avec un tuteur natif, avec des fiches support pour pratiquer entre les sessions (vocabulaire, grammaire, culture). L'intensité régulière et le format court permettent une progression rapide sans surcharger l'emploi du temps de l'enfant.<br><br>Pricing 150€/mois, formules payées au mois, au trimestre ou à l'année. Lingo joue un rôle stratégique de sourcing pour Eddmon Pair : les tuteurs natifs qui souhaitent venir vivre en France deviennent automatiquement les candidats au pair pour les familles clientes du groupe."
+      role: "Apprendre une langue dès le plus jeune âge avec des tuteurs natifs du pays ciblé. Cours en ligne uniquement via Swype pour garantir la scalabilité et la disponibilité des natifs. Le sourcing se fait par recrutement d'étudiants dans les facultés étrangères, ce qui nous permet de garder une marge solide tout en offrant des natifs premium.<br><br>Format standard : 3 sessions de 30 minutes par semaine avec un tuteur natif, avec des fiches support pour pratiquer entre les sessions (vocabulaire, grammaire, culture). Les créneaux sont réservés via Eddmon Connect. L'intensité régulière et le format court permettent une progression rapide sans surcharger l'emploi du temps de l'enfant.<br><br>Pricing 150€/mois, formules payées au mois, au trimestre ou à l'année. Lingo joue un rôle stratégique de sourcing pour Eddmon Pair : les tuteurs natifs qui souhaitent venir vivre en France deviennent automatiquement les candidats au pair pour les familles clientes du groupe."
     },
     'studio-v': {
       name: 'Eddmon Studio', tag: 'Cours en groupe', color: 'amber',
-      tools: [], res: ['tuteurs'], pers: ['groupe'],
+      tools: ['connect'], res: ['tuteurs'], pers: ['groupe'], syn: [], price: '16€/h',
       refs: [{name: 'meetinclass.com', url: 'https://www.meetinclass.com/'}],
-      role: "Plateforme de réservation de cours groupés de 2 à 4 élèves maximum chez un tuteur vérifié. Le tuteur déclare qu'il reçoit chez lui, son appartement et son profil sont vérifiés automatiquement. Les familles cherchent un tuteur star dans leur zone, comparent les profils et réservent un créneau. Les élèves se retrouvent chez le tuteur pour un cours en petit groupe, souvent entre amis, ce qui réduit la barrière psychologique du cours solo.<br><br>Pricing 16€/heure par élève. Pas de déduction fiscale, mais un tarif beaucoup plus accessible qui ouvre le marché aux budgets plus légers. Studio est à la fois une verticale commerciale autonome ET une infrastructure stratégique pour le groupe : l'option « en groupe » de Prep et Tempo passe par cette interface."
+      role: "Plateforme de réservation de cours groupés de 2 à 4 élèves maximum chez un tuteur vérifié. Le tuteur déclare qu'il reçoit chez lui, son appartement et son profil sont vérifiés automatiquement. Les familles cherchent un tuteur star dans leur zone via Eddmon Connect, comparent les profils et réservent un créneau. Les élèves se retrouvent chez le tuteur pour un cours en petit groupe, souvent entre amis, ce qui réduit la barrière psychologique du cours solo.<br><br>Pricing 16€/heure par élève. Pas de déduction fiscale, mais un tarif beaucoup plus accessible qui ouvre le marché aux budgets plus légers. Studio est à la fois une verticale commerciale autonome ET une infrastructure stratégique pour le groupe : l'option « en groupe » de Prep et Tempo passe par cette interface."
     },
     'tempo': {
       name: 'Eddmon Tempo', tag: 'Musique', color: 'pink',
-      tools: ['swype','studio'], res: ['tuteurs'], pers: ['passion'],
+      tools: ['swype','connect','studio'], res: ['tuteurs'], pers: ['passion'], syn: [], price: '25€/h',
       refs: [],
-      role: "Apprendre tous les instruments en quelques cours, sans pression, par passion ou par ambition. Trois formats au choix : à domicile pour la déduction fiscale 50%, en ligne via Swype, ou en groupe via Eddmon Studio.<br><br>La particularité : le réseau est élargi au-delà des étudiants majors pour inclure des profs expérimentés type Superprof (concertistes, musiciens professionnels) pour garantir une qualité pédagogique sur tous les instruments. Pricing 25€/heure pour toutes les options. La verticale élargit notre marché au-delà du scolaire pur et renforce l'image d'éveil culturel et artistique du groupe."
+      role: "Apprendre tous les instruments en quelques cours, sans pression, par passion ou par ambition. Trois formats au choix : à domicile pour la déduction fiscale 50%, en ligne via Swype, ou en groupe via Eddmon Studio. Les créneaux se réservent depuis Eddmon Connect.<br><br>La particularité : le réseau est élargi au-delà des étudiants majors pour inclure des profs expérimentés type Superprof (concertistes, musiciens professionnels) pour garantir une qualité pédagogique sur tous les instruments. Pricing 25€/heure pour toutes les options. La verticale élargit notre marché au-delà du scolaire pur et renforce l'image d'éveil culturel et artistique du groupe."
     },
     'nest': {
       name: 'Eddmon Nest', tag: 'Babysitting éducatif', color: 'green',
-      tools: [], res: ['tuteurs'], pers: ['csp','debordes'],
+      tools: ['connect'], res: ['tuteurs'], pers: ['csp','debordes'], syn: [], price: '14,90€/h',
       refs: [],
-      role: "Le babysitting qui éduque, par des étudiants des meilleures écoles. Ce n'est pas de la simple surveillance, c'est un temps éducatif actif : lecture, aide aux devoirs, éveil. Même réseau que celui des cours particuliers Eddmon, avec des étudiants qui viennent à domicile.<br><br>Pricing 14,90€/heure avec avance immédiate URSSAF (cadre SAP), ramenant le prix net effectif autour de 7,45€/heure. Nest capture la famille dès le plus jeune âge de l'enfant, crée une entrée précoce dans l'écosystème, et prépare la transition naturelle vers les cours particuliers classiques."
+      role: "Le babysitting qui éduque, par des étudiants des meilleures écoles. Ce n'est pas de la simple surveillance, c'est un temps éducatif actif : lecture, aide aux devoirs, éveil. Même réseau que celui des cours particuliers Eddmon, avec des étudiants qui viennent à domicile. Réservation et planification depuis Eddmon Connect.<br><br>Option garde élargie : le baby-sitter peut aussi s'occuper du chien, des plantes, des courriers pendant la prestation. Pour les familles avec personnes dépendantes à charge, l'avance immédiate URSSAF couvre la promenade des animaux dans le cadre SAP.<br><br>Pricing 14,90€/heure avec avance immédiate URSSAF (cadre SAP), ramenant le prix net effectif autour de 7,45€/heure. Nest capture la famille dès le plus jeune âge de l'enfant, crée une entrée précoce dans l'écosystème, et prépare la transition naturelle vers les cours particuliers classiques."
     },
     'pair': {
       name: 'Eddmon Pair', tag: 'Au pair', color: 'purple',
-      tools: [], res: ['tuteurs'], pers: ['international','ecoles'],
+      tools: ['connect'], res: ['tuteurs'], pers: ['international','ecoles'], syn: ['ecoles-syn'], price: 'Premium',
       refs: [],
-      role: "Un étudiant étranger qui vit chez la famille sur une durée longue et accompagne les enfants au quotidien : garde, devoirs, immersion linguistique. Le sourcing se fait via les tuteurs natifs de Eddmon Lingo qui souhaitent venir en France, offrant un vivier qualifié et déjà évalué par nos soins.<br><br>Le matching vise des familles très aisées (écoles type EIB Monceau, Jeannine Manuel), ouvertes à l'international. Synergie stratégique majeure avec Le Kompa : nous avons accès direct aux écoles primaires privées hors contrat les plus onéreuses de Paris, ce qui nous donne une source de clients gratuits et aisés inégalable sur le marché.<br><br>Frais d'inscription offerts si la famille consomme déjà un autre service du Hub pour inciter au cross-sell. C'est la verticale qui capture la famille sur la durée la plus longue avec le panier moyen le plus élevé."
+      role: "Un étudiant étranger qui vit chez la famille sur une durée longue et accompagne les enfants au quotidien : garde, devoirs, immersion linguistique. Le sourcing se fait via les tuteurs natifs de Eddmon Lingo qui souhaitent venir en France, offrant un vivier qualifié et déjà évalué par nos soins. Matching et gestion de la relation via Eddmon Connect.<br><br>Le matching vise des familles très aisées (écoles type EIB Monceau, Jeannine Manuel), ouvertes à l'international. Synergie stratégique majeure avec Le Kompa : nous avons accès direct aux écoles primaires privées hors contrat les plus onéreuses de Paris, ce qui nous donne une source de clients gratuits et aisés inégalable sur le marché.<br><br>Frais d'inscription offerts si la famille consomme déjà un autre service du Hub pour inciter au cross-sell. C'est la verticale qui capture la famille sur la durée la plus longue avec le panier moyen le plus élevé."
     },
     'casa': {
       name: 'Eddmon Casa', tag: 'Ménage premium', color: 'gray',
-      tools: [], res: [], pers: ['debordes'],
+      tools: ['connect'], res: [], pers: ['debordes'], syn: [], price: '~10€/h',
       refs: [
         {name: 'shiva.fr', url: 'https://www.shiva.fr/'},
         {name: 'wecasa.fr', url: 'https://www.wecasa.fr/'}
       ],
-      role: "Le ménage premium inspiré de Shiva pour l'excellence et WeCasa pour l'expérience utilisateur. L'objectif est de devenir le point de contact unique pour les familles CSP+ déjà acquises. Les agents sont recrutés, formés aux standards de l'hôtellerie (propreté, discrétion) et gérés via la plateforme.<br><br>Pricing autour de 10€/heure (net après avantage fiscal SAP). Casa maximise le panier moyen par famille et renforce l'image d'écosystème global où Eddmon gère autant l'éducation que l'intendance de la maison. C'est un pur produit d'upsell sur notre base existante."
+      role: "Le ménage premium inspiré de Shiva pour l'excellence et WeCasa pour l'expérience utilisateur. L'objectif est de devenir le point de contact unique pour les familles CSP+ déjà acquises. Les agents sont recrutés, formés aux standards de l'hôtellerie (propreté, discrétion) et gérés via Eddmon Connect pour la planification et la communication.<br><br>Pricing autour de 10€/heure (net après avantage fiscal SAP). Casa maximise le panier moyen par famille et renforce l'image d'écosystème global où Eddmon gère autant l'éducation que l'intendance de la maison. C'est un pur produit d'upsell sur notre base existante."
+    },
+    'snack': {
+      name: 'Eddmon Snack', tag: 'Goûters hebdo', color: 'orange',
+      tools: ['hub'], res: [], pers: ['csp','debordes'], syn: ['snack-syn'], price: '~39€/sem',
+      refs: [],
+      role: "Plus jamais d'enfant qui arrive à l'école sans goûter. Chaque semaine, vous recevez à domicile un panier hebdo de 5 goûters sains, équilibrés et adaptés à l'âge de votre enfant, livré le dimanche soir. Préparés avec des fournisseurs sélectionnés par nos nutritionnistes, sans sucres ajoutés inutiles, sans additifs douteux.<br><br>Synergie majeure avec Le Kompa : le sourcing et la gestion du stock sont mutualisés au niveau du groupe Trousseau. Eddmon livre à domicile aux familles, Le Kompa distribue dans les écoles à la sortie. Volume groupé = prix de gros = marge solide.<br><br>Pricing suggéré 39€/semaine pour 5 goûters (soit 7,80€ par goûter). Abonnement hebdomadaire reconductible, résiliable à tout moment. Vous lâchez prise sur un truc, votre enfant mange mieux, et vous retrouvez de la sérénité dans votre routine du matin."
+    },
+    'escape': {
+      name: 'Eddmon Escape', tag: 'Conciergerie voyages', color: 'cyan',
+      tools: ['hub','connect'], res: ['tuteurs'], pers: ['csp'], syn: [], price: '5000-10000€',
+      refs: [],
+      role: "Vos vacances ne devraient pas dépendre de la disponibilité de la baby-sitter. Eddmon Escape prend en charge votre adolescent pendant que vous voyagez, avec un programme sur-mesure qui combine cours à domicile par un tuteur dédié, sorties culturelles dans Paris (en lien avec Eddmon Cité), et suivi quotidien que vous recevez sur votre téléphone via le Hub familial. Pendant que vous savourez votre voyage, votre enfant ne perd pas son temps devant un écran : il avance, découvre, grandit.<br><br>Un seul interlocuteur Eddmon orchestre tout depuis Eddmon Connect, du planning aux repas en passant par les activités. Option garde élargie possible si la famille a un animal de compagnie (Eddmon Nest prend le relais sur le chien).<br><br>Pricing 5000 à 10000€ par séjour selon la durée et l'intensité du programme. Paiement one-shot, acompte 30% à la réservation, solde au démarrage. Le format premium qui justifie son ticket parce qu'il libère totalement les parents de la charge mentale enfants."
+    },
+    'cite': {
+      name: 'Eddmon Cité', tag: 'Sorties culturelles & sciences', color: 'rose',
+      tools: ['connect'], res: ['tuteurs'], pers: ['culture','csp'], syn: [], price: '30-100€/sortie',
+      refs: [],
+      role: "Paris est un musée à ciel ouvert et un campus scientifique mondial, encore faut-il avoir le bon guide. Eddmon Cité connecte les familles avec nos meilleurs tuteurs étudiants, qui proposent des visites culturelles et scientifiques sur leurs domaines de passion.<br><br>Volet culturel : un étudiant en histoire de l'art au Louvre, un major de Sciences Po au Quai d'Orsay, un philosophe en herbe dans les jardins du Luxembourg.<br><br>Volet ingénieur et sciences : un élève des Arts et Métiers à la Cité des Sciences ou au musée des Arts et Métiers, un étudiant de l'UPMC à la Galerie de l'Évolution, un futur centralien au Palais de la Découverte.<br><br>Chaque tuteur définit son format (en solo ou en petit groupe), son tarif, et précise s'il prend en charge les billets ou non. Les familles et les élèves peuvent noter les étudiants après chaque visite. Vous choisissez selon les passions de votre enfant, les disponibilités, et les avis des autres familles. Réservation et paiement bloqué via Eddmon Connect, sur le modèle Eddmon North.<br><br>Pricing entre 30 et 100€ par sortie selon le tuteur et l'inclusion ou non des billets. Pas une visite touristique, une vraie transmission de savoir entre un étudiant brillant et votre enfant. Cumul possible avec Eddmon Escape pour intégrer les sorties dans un programme complet."
+    },
+    'monaco': {
+      name: 'Eddmon Monaco', tag: 'Riviera ultra-premium', color: 'indigo',
+      tools: ['connect','swype'], res: ['tuteurs'], pers: ['riviera'], syn: [], price: '50-120€/h',
+      refs: [],
+      role: "Monaco mérite mieux que les solutions de garde standard. Eddmon Monaco connecte les familles monégasques aux meilleurs étudiants des grandes écoles françaises, en particulier l'EDHEC à Nice, à 30 minutes de Monaco en transport en commun. Plus besoin de payer des baby-sitters qui ne parlent pas français : nos étudiants apportent un vrai accompagnement éducatif.<br><br>Une seule plateforme pour tous les besoins éducatifs et de garde de la Riviera : cours particuliers, baby-sitting éducatif, accompagnement aux activités culturelles et sportives, sorties pédagogiques, immersion francophone. Réservation centralisée via Eddmon Connect, cours en ligne possibles via Swype pour les compléments.<br><br>Pricing premium aligné sur le pouvoir d'achat local : 50-80€/h pour le baby-sitting éducatif, 80-120€/h pour les cours particuliers, formules forfait mensuel possibles. Pas d'avance URSSAF (ces familles paient plein pot, c'est leur standard). Marché niche à très haut pouvoir d'achat (38000 habitants Monaco + Nice et environs), positionnement ultra-premium qui justifie nos tarifs.<br><br>Une offre pensée pour des familles qui ont les moyens d'exiger l'excellence."
+    },
+    'kit': {
+      name: 'Eddmon Kit', tag: 'Fournitures rentrée', color: 'lime',
+      tools: ['hub'], res: [], pers: ['debordes','csp'], syn: ['kit-syn'], price: '100-150€/enfant',
+      refs: [],
+      role: "Plus jamais de course aux fournitures un dimanche soir d'août. Vous saisissez la liste de votre école dans votre espace Eddmon, vous choisissez la date et le créneau de livraison, et tout arrive chez vous, prêt à être glissé dans le cartable. Cahiers, stylos, agendas, calculatrices, classeurs : on s'occupe de tout, vous récupérez du temps et de la sérénité.<br><br>Synergie majeure avec Le Kompa : back-office mutualisé pour le sourcing en gros (mêmes stylos, mêmes cahiers, mêmes agendas, juste un branding différent). Eddmon livre à domicile, Le Kompa livre directement dans les écoles partenaires. Volume groupé Trousseau = prix de gros que les enseignes papeterie ne peuvent pas matcher.<br><br>Pricing autour de 100-150€ par enfant selon la liste, prix coûtant + 15-20% de marge service. Paiement one-shot annuel à la rentrée, ou option d'étalement en 3 fois sans frais. Le service qui transforme la corvée d'août en simple clic."
+    },
+    'stage': {
+      name: 'Eddmon Stage', tag: 'Stages de 3e à domicile', color: 'blue',
+      tools: ['connect','hub'], res: ['tuteurs'], pers: ['csp','opportunites'], syn: ['stages-syn'], price: '200-400€/placement',
+      refs: [],
+      role: "La galère du stage de 3e, on s'en occupe. Trouver une entreprise qualifiante pour un ado de 14 ans, c'est une corvée que les parents subissent dans leur réseau personnel, souvent sans résultat satisfaisant. Eddmon Stage met fin à cette galère en mobilisant un asset unique : nos 1500+ tuteurs sont alumni ou en cursus dans les plus grandes écoles, donc des relais directs vers des banques, cabinets de conseil, startups, médias, agences, hôpitaux, cabinets d'avocats.<br><br>Le parent renseigne le projet d'orientation de son enfant dans le Hub familial, on déclenche le matching avec les entreprises de notre réseau via Eddmon Connect, et l'ado décroche un stage qui correspond à ses envies, pas un stage par défaut chez le cousin de tonton.<br><br>Service rendu à domicile (entretiens de préparation avec un tuteur, suivi pendant le stage, debrief), donc avance immédiate URSSAF dans le cadre SAP soutien scolaire : la moitié du prix est déduite immédiatement.<br><br>Synergie majeure avec Le Kompa : l'école Kompa propose le service comme avantage à ses directeurs (fidélisation des familles sans effort administratif), Eddmon mobilise son réseau pour le placement effectif. Une seule offre qui sert deux marques.<br><br>Pricing 200 à 400€ par placement selon la rareté et le prestige de l'entreprise visée. Paiement one-shot par placement réussi, garantie satisfait ou remboursé si l'entreprise se désiste."
+    },
+    'global': {
+      name: 'Eddmon Global', tag: 'Cours expatriés', color: 'cyan',
+      tools: ['swype','connect'], res: ['tuteurs','contenus'], pers: ['expat','international'], syn: [], price: 'Forfait 3/6/12 mois',
+      refs: [],
+      role: "Votre famille est expatriée et vous prévoyez le retour en France dans 12 ou 24 mois ? Eddmon Global accompagne votre enfant à distance via Swype, notre plateforme propriétaire de cours en ligne avec tablettes graphiques. Pas un Zoom de fortune : une vraie classe virtuelle interactive, animée par un tuteur major d'une grande école française, calibrée sur les programmes officiels de l'Éducation nationale. Votre enfant arrive en France parfaitement aligné avec ses futurs camarades, et vous, vous gagnez la sérénité du retour.<br><br>Format de paiement : formule prépayée 3, 6 ou 12 mois, avec prix dégressif selon le nombre de cours hebdomadaires choisis (1, 2, 3 ou 4 séances par semaine). Plus la famille s'engage longtemps et intensément, plus le tarif horaire baisse. Réservation des créneaux via Eddmon Connect avec gestion automatique du fuseau horaire.<br><br>Marché ciblé : 2,5 millions de Français vivant à l'étranger selon le ministère des Affaires étrangères, dont environ 30% avec enfants. Focus sur les familles installées à Dubaï, Singapour, Londres, New York, Hong Kong, qui prévoient un retour en France à 1-3 ans et veulent éviter le décrochage scolaire. La verticale active aussi naturellement Eddmon Lingo (langue locale du pays d'expatriation) et Eddmon Prep (préparation des concours post-bac à distance)."
     }
   };
 
-  var colors = {
-    purple: ['#26215C','#CECBF6','#7F77DD'],
-    teal:   ['#04342C','#9FE1CB','#1D9E75'],
-    coral:  ['#4A1B0C','#F5C4B3','#D85A30'],
-    pink:   ['#4B1528','#F4C0D1','#D4537E'],
-    gray:   ['#3a3a37','#D3D1C7','#888780'],
-    blue:   ['#042C53','#B5D4F4','#378ADD'],
-    green:  ['#173404','#C0DD97','#639922'],
-    amber:  ['#412402','#FAC775','#BA7517']
+  // Définition de l'ordre d'affichage des verticales dans la grille
+  var vertOrder = ['eddmon','coach','north','prep','lingo','studio-v','tempo','nest','pair','casa','snack','escape','cite','monaco','kit','stage','global'];
+
+  // Tags badge pour identifier les nouvelles verticales et celles avec synergie Kompa
+  var vertBadge = {
+    'snack': 'Nouveau · × Kompa',
+    'escape': 'Nouveau',
+    'cite': 'Nouveau',
+    'monaco': 'Nouveau',
+    'kit': 'Nouveau · × Kompa',
+    'stage': 'Nouveau · × Kompa',
+    'global': 'Nouveau',
+    'pair': '× Kompa',
+    'coach': 'V2'
   };
 
-  var info = document.getElementById('eco-info');
+  var colors = {
+    purple:  ['#26215C','#CECBF6','#7F77DD'],
+    teal:    ['#04342C','#9FE1CB','#1D9E75'],
+    coral:   ['#4A1B0C','#F5C4B3','#D85A30'],
+    pink:    ['#4B1528','#F4C0D1','#D4537E'],
+    gray:    ['#3a3a37','#D3D1C7','#888780'],
+    blue:    ['#042C53','#B5D4F4','#378ADD'],
+    green:   ['#173404','#C0DD97','#639922'],
+    amber:   ['#412402','#FAC775','#BA7517'],
+    indigo:  ['#1B1F4D','#B5BEEB','#5C6BCF'],
+    rose:    ['#4F1424','#F2B5C5','#C04567'],
+    lime:    ['#2A3D08','#D2E098','#88A638'],
+    cyan:    ['#033540','#9DD6E2','#2392B0'],
+    orange:  ['#4D2400','#FAB97A','#D98030']
+  };
+
+  // Génération dynamique de la grille de cards
+  var grid = document.getElementById('eco-grid');
+  var html = '';
+  vertOrder.forEach(function(id) {
+    var v = verts[id];
+    var badge = vertBadge[id] ? '<div class="eco-card-badge">' + vertBadge[id] + '</div>' : '';
+    html += '<div class="eco-card" data-c="' + v.color + '" data-id="' + id + '">' +
+              badge +
+              '<div><div class="eco-dot"></div><div class="eco-card-name">' + v.name + '</div><div class="eco-card-tag">' + v.tag + '</div></div>' +
+              '<div class="eco-card-price">' + v.price + '</div>' +
+            '</div>';
+  });
+  grid.innerHTML = html;
+
+  // Création du panel d'info qui sera inséré dynamiquement dans la grille
+  var info = document.createElement('div');
+  info.className = 'eco-info';
+  info.id = 'eco-info';
+  // On l'attache initialement à la fin du grid (sera repositionné lors du clic)
+  grid.appendChild(info);
+
   var resetBtn = document.getElementById('eco-reset');
   var activeId = null;
 
@@ -425,15 +499,34 @@
     return '<span class="eco-info-sep">·</span><span class="eco-info-refs">Réf : ' + links + '</span>';
   }
 
+  // Calcule la position de la fin de ligne où se trouve la card cliquée
+  function getEndOfRow(targetCard) {
+    var cards = Array.prototype.filter.call(grid.children, function(c) { return c.classList.contains('eco-card'); });
+    var targetTop = targetCard.getBoundingClientRect().top;
+    // Cherche la dernière card de la même ligne (même offsetTop)
+    var lastCardInRow = targetCard;
+    for (var i = 0; i < cards.length; i++) {
+      var rect = cards[i].getBoundingClientRect();
+      if (Math.abs(rect.top - targetTop) < 5) {
+        lastCardInRow = cards[i];
+      }
+    }
+    return lastCardInRow;
+  }
+
   function paint(vertId) {
     var v = verts[vertId];
     if (!v) return;
     var palette = colors[v.color];
 
     var cards = document.querySelectorAll('.eco-card');
+    var clickedCard = null;
     for (var i = 0; i < cards.length; i++) {
       cards[i].classList.remove('on','dim');
-      if (cards[i].dataset.id === vertId) cards[i].classList.add('on');
+      if (cards[i].dataset.id === vertId) {
+        cards[i].classList.add('on');
+        clickedCard = cards[i];
+      }
       else cards[i].classList.add('dim');
     }
 
@@ -442,6 +535,7 @@
     (v.tools||[]).forEach(function(id){ related[id]=1; });
     (v.res||[]).forEach(function(id){ related[id]=1; });
     (v.pers||[]).forEach(function(id){ related[id]=1; });
+    (v.syn||[]).forEach(function(id){ related[id]=1; });
 
     for (var j = 0; j < pills.length; j++) {
       pills[j].classList.remove('hot','dim');
@@ -458,6 +552,14 @@
       }
     }
 
+    // Repositionne le panel info juste après la dernière card de la ligne cliquée
+    if (clickedCard) {
+      var lastInRow = getEndOfRow(clickedCard);
+      if (lastInRow.nextSibling !== info) {
+        grid.insertBefore(info, lastInRow.nextSibling);
+      }
+    }
+
     info.style.setProperty('--info-color', palette[2]);
     info.innerHTML =
       '<span class="eco-info-name">' + v.name + '</span>' +
@@ -471,10 +573,10 @@
   }
 
   function paintFromPill(kind, id) {
-    var matchKey = kind === 'tool' ? 'tools' : (kind === 'res' ? 'res' : 'pers');
+    var matchKey = kind === 'tool' ? 'tools' : (kind === 'res' ? 'res' : (kind === 'syn' ? 'syn' : 'pers'));
     var matchingVerts = [];
     for (var vid in verts) {
-      if (verts[vid][matchKey].indexOf(id) >= 0) matchingVerts.push(vid);
+      if ((verts[vid][matchKey]||[]).indexOf(id) >= 0) matchingVerts.push(vid);
     }
 
     var pills = document.querySelectorAll('.eco-pill');
@@ -491,16 +593,29 @@
     }
 
     var cards = document.querySelectorAll('.eco-card');
+    var lastMatchedCard = null;
     for (var m = 0; m < cards.length; m++) {
       cards[m].classList.remove('on','dim');
       if (matchingVerts.indexOf(cards[m].dataset.id) >= 0) {
         cards[m].classList.add('on');
+        lastMatchedCard = cards[m];
       } else {
         cards[m].classList.add('dim');
       }
     }
 
-    var labels = { tool: 'Outil', res: 'Ressource', pers: 'Segment' };
+    // Place le panel après la dernière card matchée
+    if (lastMatchedCard) {
+      var lastInRow = getEndOfRow(lastMatchedCard);
+      if (lastInRow.nextSibling !== info) {
+        grid.insertBefore(info, lastInRow.nextSibling);
+      }
+    } else {
+      // Aucune match, on remet en fin de grid
+      grid.appendChild(info);
+    }
+
+    var labels = { tool: 'Outil', res: 'Ressource', pers: 'Segment', syn: 'Synergie Le Kompa' };
     var pillEl = document.querySelector('.eco-pill[data-kind="'+kind+'"][data-id="'+id+'"]');
     var pillName = pillEl ? pillEl.textContent : '';
     var vertNames = matchingVerts.map(function(vid){ return verts[vid].name; }).join(', ') || 'aucune verticale';
@@ -523,6 +638,8 @@
       pills[j].style.removeProperty('--hot-border');
     }
     info.classList.remove('show');
+    // Remet le panel en fin de grid
+    grid.appendChild(info);
     resetBtn.classList.remove('show');
     activeId = null;
   }
@@ -543,6 +660,17 @@
   });
 
   resetBtn.addEventListener('click', resetAll);
+
+  // Recalcul de la position du panel si la fenêtre est redimensionnée et qu'un panel est ouvert
+  window.addEventListener('resize', function() {
+    if (!activeId) return;
+    var activeCard = document.querySelector('.eco-card.on');
+    if (!activeCard) return;
+    var lastInRow = getEndOfRow(activeCard);
+    if (lastInRow.nextSibling !== info) {
+      grid.insertBefore(info, lastInRow.nextSibling);
+    }
+  });
 })();
 </script>
 
